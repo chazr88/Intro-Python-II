@@ -39,8 +39,31 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-new_player = Player("Chaz", Room("outside", "brown"))
+new_player = Player("Chaz", Room('outside', 'brown'))
 print(new_player)
+
+def update_room(new_room):
+    if new_room == room['foyer']:
+        new_player.room.set_name('foyer')
+    elif new_room == room['outside']:
+        new_player.room.set_name('outside')
+    elif new_room == room['overlook']:
+        new_player.room.set_name('overlook')
+    elif new_room == room['narrow']:
+        new_player.room.set_name('narrow')
+    elif new_room == room['treasure']:
+        new_player.room.set_name('treasure')
+    # print(new_player.room.get_name())
+    # new_player.room.set_name(new_room)
+    print(f"You are now in location {new_room}")
+    print(new_player.room.get_name())
+    # new_room = f"room['{current_room}']" + "." + selection
+    # if new_room == current_room:
+    #     return (f"Sorry you cannot go that way
+    # else: 
+    #     print (f"{new_player.get_name()} is now in {new_room}")
+    #     return(new_player.room.set_name(new_room))
+    
 # Write a loop that:
 #
 # * Prints the current room name
@@ -51,9 +74,53 @@ print(new_player)
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+
 selection = ""
 while selection is not "q":
-    selection = input(f"Please choose n, s, e, w to move your player in that direction to a new room: ")
     
-    if selection == "n":
-        print("Yay")
+    selection = selection + input(f"Please choose n, s, e, w to move your player in that direction to a new room: ")
+
+    if selection == 'n':
+        try:
+            new_room = room[new_player.room.get_name()].n_to
+            selection = ""
+            update_room(new_room)
+        except:
+            print("sorry you cant go that way")
+            selection = ""
+    elif(selection == 'e'):
+        try:
+            new_room = room[new_player.room.get_name()].e_to
+            selection = ""
+            update_room(new_room)
+        except:
+            print("sorry you cant go that way")
+            selection = ""
+    elif(selection == 's'):
+        try:
+            new_room = room[new_player.room.get_name()].s_to
+            selection = ""
+            update_room(new_room)
+        except:
+            print("sorry you cant go that way")
+            selection = ""
+    elif(selection == 'w'):
+        try:
+            new_room = room[new_player.room.get_name()].w_to
+            selection = ""
+            update_room(new_room)
+        except:
+            print("sorry you cant go that way")
+            selection = ""
+    else:
+        print("Sorry your entry is invalid. Please enter a direction")
+        selection = ""
+
+
+    #my_room = room[new_player.room.get_name()]
+    #my_room = str(my_room) + selection
+
+    
+ 
+    

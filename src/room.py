@@ -9,5 +9,18 @@ class Room:
     def __str__(self):
         return self.name
 
+    def get_name(self):
+        return self.name
+
+    def set_name(self, new_name):
+        self.name = new_name
+
     def get_color(self):
         return self.color
+
+    # def __add__(self, other):
+    #     return str(self) + other
+
+    # def __radd__(self, other):
+    #     return other + str(self)
+
