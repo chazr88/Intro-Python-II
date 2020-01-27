@@ -39,7 +39,7 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-new_player = Player("Chaz", Room('outside', 'brown'))
+new_player = Player("Chaz", Room('outside', ["hat", "bookbag"]), ['coat', 'phone'])
 print(new_player)
 
 def update_room(new_room):
@@ -53,17 +53,19 @@ def update_room(new_room):
         new_player.room.set_name('narrow')
     elif new_room == room['treasure']:
         new_player.room.set_name('treasure')
-    # print(new_player.room.get_name())
-    # new_player.room.set_name(new_room)
+
     print(f"You are now in location {new_room}")
     print(new_player.room.get_name())
-    # new_room = f"room['{current_room}']" + "." + selection
-    # if new_room == current_room:
-    #     return (f"Sorry you cannot go that way
-    # else: 
-    #     print (f"{new_player.get_name()} is now in {new_room}")
-    #     return(new_player.room.set_name(new_room))
-    
+
+def drop_item(item):
+    new_player.drop_item(item)
+    print(f"you just dropped {item}")
+    print(new_player)
+
+def add_item(item):
+    new_player.pickup_item(item)
+    print(f"you just picked up {item}")
+    print(new_player)
 # Write a loop that:
 #
 # * Prints the current room name
@@ -74,12 +76,11 @@ def update_room(new_room):
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-
-
 selection = ""
 while selection is not "q":
     
-    selection = selection + input(f"Please choose n, s, e, w to move your player in that direction to a new room: ")
+    selection = selection + input(f"Please choose n, s, e, w to move your player in that direction to a new room.\
+You can also drop an item in your hand by typing 'drop', or pick up an item from the current room by typing 'pickup': ")
 
     if selection == 'n':
         try:
@@ -113,8 +114,14 @@ while selection is not "q":
         except:
             print("sorry you cant go that way")
             selection = ""
+    elif(selection == 'drop'):
+        item = input(f"please enter the name of the item you wish to drop: ")
+        drop_item(item)
+    elif(selection == 'pickup'):
+        item = input(f"please enter the name of the item you wish to pick up: ")
+        add_item(item)
     else:
-        print("Sorry your entry is invalid. Please enter a direction")
+        print("Sorry your entry is invalid.")
         selection = ""
 
 
@@ -122,5 +129,5 @@ while selection is not "q":
     #my_room = str(my_room) + selection
 
     
- 
+
     
